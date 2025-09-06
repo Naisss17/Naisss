@@ -13,220 +13,214 @@
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #fafafa;
+            background: #0a0a0a;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.15) 0%, transparent 50%);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            color: #2d3748;
+            color: #e2e8f0;
+            overflow-x: hidden;
         }
 
         .header {
-            background: white;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 1.5rem 2rem;
-            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
-            color: #1a202c;
             font-size: 1.5rem;
-            font-weight: 600;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
+        .logo-icon {
+            font-size: 1.8rem;
+        }
+
         .back-btn {
-            background: #4a5568;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
             color: white;
             padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            border-radius: 25px;
             cursor: pointer;
             font-size: 0.9rem;
             font-weight: 500;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             display: none;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
 
         .back-btn:hover {
-            background: #2d3748;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
 
         .container {
-            flex: 1;
-            padding: 3rem 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            width: 100%;
+            padding: 4rem 2rem;
         }
 
-        .page-title {
+        .hero {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
-        .page-title h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #1a202c;
-            margin-bottom: 0.5rem;
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
         }
 
-        .page-title p {
+        .hero p {
             font-size: 1.1rem;
-            color: #718096;
+            color: #94a3b8;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
-        .menu-container {
+        .apps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 1.5rem;
-            width: 100%;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
-        .menu-card {
-            background: white;
-            border-radius: 12px;
+        .app-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
             padding: 2rem;
-            text-align: left;
             cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid #e2e8f0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
+            backdrop-filter: blur(10px);
             overflow: hidden;
         }
 
-        .menu-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            border-color: #cbd5e0;
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .card-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
+        .app-card:hover::before {
+            opacity: 1;
+        }
+
+        .app-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         .card-icon {
-            font-size: 2rem;
-            margin-right: 1rem;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f7fafc;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            opacity: 0.9;
         }
 
         .card-title {
-            color: #1a202c;
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             font-weight: 600;
-            margin-bottom: 0.25rem;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
         }
 
         .card-description {
-            color: #718096;
-            font-size: 0.95rem;
+            color: #94a3b8;
             line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         .card-arrow {
             position: absolute;
             top: 2rem;
             right: 2rem;
-            color: #cbd5e0;
+            color: rgba(255, 255, 255, 0.3);
             font-size: 1.2rem;
             transition: all 0.3s ease;
         }
 
-        .menu-card:hover .card-arrow {
-            color: #4a5568;
-            transform: translateX(4px);
+        .app-card:hover .card-arrow {
+            color: rgba(255, 255, 255, 0.7);
+            transform: translate(4px, -4px);
         }
 
         .iframe-container {
             display: none;
             width: 100%;
             height: calc(100vh - 120px);
-            border-radius: 12px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            background: white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .iframe-container iframe {
             width: 100%;
             height: 100%;
             border: none;
+            background: white;
         }
 
         .loading {
             display: none;
             text-align: center;
-            color: #4a5568;
+            margin: 4rem 0;
+        }
+
+        .loading-text {
+            color: #94a3b8;
             font-size: 1.1rem;
-            font-weight: 500;
-            margin: 3rem 0;
+            margin-bottom: 1rem;
         }
 
         .loading-spinner {
-            display: inline-block;
-            width: 24px;
-            height: 24px;
-            border: 3px solid #e2e8f0;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            border-top-color: #4a5568;
+            border-top-color: #667eea;
             animation: spin 1s ease-in-out infinite;
-            margin-left: 12px;
+            margin: 0 auto;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                padding: 1rem 1.5rem;
-            }
-
-            .container {
-                padding: 2rem 1rem;
-            }
-
-            .page-title h1 {
-                font-size: 2rem;
-            }
-
-            .menu-container {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .menu-card {
-                padding: 1.5rem;
-            }
-
-            .card-icon {
-                font-size: 1.5rem;
-                width: 50px;
-                height: 50px;
-            }
-
-            .card-title {
-                font-size: 1.1rem;
-            }
         }
 
         .show {
@@ -236,84 +230,124 @@
         .hide {
             display: none !important;
         }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .apps-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .app-card {
+                padding: 1.5rem;
+            }
+
+            .card-icon {
+                font-size: 2rem;
+            }
+
+            .card-title {
+                font-size: 1.2rem;
+            }
+
+            .header {
+                padding: 1rem 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="logo">
-            <span>📊</span>
-            Dashboard Apps
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                Dashboard
+            </div>
+            <button class="back-btn" onclick="showMenu()">
+                ← Kembali
+            </button>
         </div>
-        <button class="back-btn" onclick="showMenu()">
-            ← Kembali ke Menu
-        </button>
     </div>
 
     <div class="container">
-        <div class="page-title">
+        <div class="hero" id="hero">
             <h1>Dashboard Aplikasi</h1>
-            <p>Pilih aplikasi yang ingin Anda gunakan</p>
+            <p>Pilih aplikasi yang ingin Anda gunakan untuk mengelola bisnis Anda dengan lebih efisien</p>
         </div>
 
-        <div class="menu-container" id="menuContainer">
-            <div class="menu-card" onclick="loadApp('stock-shopify')">
-                <div class="card-header">
-                    <div class="card-icon">🛍️</div>
-                    <div>
-                        <div class="card-title">Stock Shopify</div>
-                    </div>
-                </div>
-                <div class="card-description">Kelola stok produk Shopify dengan mudah dan efisien. Monitor inventory dan update stok secara real-time.</div>
+        <div class="apps-grid" id="appsGrid">
+            <div class="app-card" onclick="loadApp('stock-shopify')">
+                <span class="card-icon">🛍️</span>
+                <h3 class="card-title">Stock Shopify</h3>
+                <p class="card-description">Kelola stok produk Shopify dengan mudah dan efisien. Monitor inventory dan update stok secara real-time.</p>
                 <div class="card-arrow">→</div>
             </div>
 
-            <div class="menu-card" onclick="loadApp('daily-stock')">
-                <div class="card-header">
-                    <div class="card-icon">📈</div>
-                    <div>
-                        <div class="card-title">Daily Stock</div>
-                    </div>
-                </div>
-                <div class="card-description">Monitor pergerakan stok harian dan analisis trend. Dashboard lengkap untuk tracking inventory.</div>
+            <div class="app-card" onclick="loadApp('daily-stock')">
+                <span class="card-icon">📈</span>
+                <h3 class="card-title">Daily Stock</h3>
+                <p class="card-description">Monitor pergerakan stok harian dan analisis trend. Dashboard lengkap untuk tracking inventory.</p>
                 <div class="card-arrow">→</div>
             </div>
 
-            <div class="menu-card" onclick="loadApp('stock-meta')">
-                <div class="card-header">
-                    <div class="card-icon">🔍</div>
-                    <div>
-                        <div class="card-title">Stock Meta</div>
-                    </div>
-                </div>
-                <div class="card-description">Analisis metadata dan informasi detail produk. Kelola data produk dengan sistem yang terintegrasi.</div>
+            <div class="app-card" onclick="loadApp('stock-meta')">
+                <span class="card-icon">🔍</span>
+                <h3 class="card-title">Stock Meta</h3>
+                <p class="card-description">Analisis metadata dan informasi detail produk. Kelola data produk dengan sistem yang terintegrasi.</p>
                 <div class="card-arrow">→</div>
             </div>
 
-            <div class="menu-card" onclick="loadApp('invoice-maker')">
-                <div class="card-header">
-                    <div class="card-icon">🧾</div>
-                    <div>
-                        <div class="card-title">Invoice Maker</div>
-                    </div>
-                </div>
-                <div class="card-description">Buat dan kelola invoice dengan template profesional. Sistem billing yang mudah digunakan.</div>
+            <div class="app-card" onclick="loadApp('invoice-maker')">
+                <span class="card-icon">🧾</span>
+                <h3 class="card-title">Invoice Maker</h3>
+                <p class="card-description">Buat dan kelola invoice dengan template profesional. Sistem billing yang mudah digunakan.</p>
                 <div class="card-arrow">→</div>
             </div>
 
-            <div class="menu-card" onclick="loadApp('bulk-discount')">
-                <div class="card-header">
-                    <div class="card-icon">💰</div>
-                    <div>
-                        <div class="card-title">Bulk Discount</div>
-                    </div>
-                </div>
-                <div class="card-description">Atur diskon massal untuk produk dengan mudah. Kelola promosi dan pricing strategy secara efektif.</div>
+            <div class="app-card" onclick="loadApp('bulk-discount')">
+                <span class="card-icon">💰</span>
+                <h3 class="card-title">Bulk Discount</h3>
+                <p class="card-description">Atur diskon massal untuk produk dengan mudah. Kelola promosi dan pricing strategy secara efektif.</p>
                 <div class="card-arrow">→</div>
             </div>
         </div>
 
         <div class="loading" id="loading">
-            Memuat aplikasi...
+            <div class="loading-text">Memuat aplikasi...</div>
             <div class="loading-spinner"></div>
         </div>
 
@@ -335,30 +369,36 @@
             const url = apps[appId];
             if (!url) return;
 
-            // Show loading
-            document.getElementById('loading').classList.add('show');
-            document.getElementById('menuContainer').classList.add('hide');
-            document.querySelector('.page-title').classList.add('hide');
+            // Add smooth transition
+            document.getElementById('appsGrid').style.opacity = '0';
+            document.getElementById('hero').style.opacity = '0';
             
-            // Show back button
-            document.querySelector('.back-btn').classList.add('show');
-            
-            // Set iframe source
-            const iframe = document.getElementById('appFrame');
-            iframe.src = url;
-            
-            // Handle iframe load
-            iframe.onload = function() {
-                document.getElementById('loading').classList.remove('show');
-                document.getElementById('iframeContainer').classList.add('show');
-            };
+            setTimeout(() => {
+                // Show loading
+                document.getElementById('loading').classList.add('show');
+                document.getElementById('appsGrid').classList.add('hide');
+                document.getElementById('hero').classList.add('hide');
+                
+                // Show back button
+                document.querySelector('.back-btn').style.display = 'block';
+                
+                // Set iframe source
+                const iframe = document.getElementById('appFrame');
+                iframe.src = url;
+                
+                // Handle iframe load
+                iframe.onload = function() {
+                    document.getElementById('loading').classList.remove('show');
+                    document.getElementById('iframeContainer').classList.add('show');
+                };
 
-            // Handle iframe error
-            iframe.onerror = function() {
-                document.getElementById('loading').classList.remove('show');
-                alert('Gagal memuat aplikasi. Silakan coba lagi.');
-                showMenu();
-            };
+                // Handle iframe error
+                iframe.onerror = function() {
+                    document.getElementById('loading').classList.remove('show');
+                    alert('Gagal memuat aplikasi. Silakan coba lagi.');
+                    showMenu();
+                };
+            }, 200);
         }
 
         function showMenu() {
@@ -366,33 +406,57 @@
             document.getElementById('iframeContainer').classList.remove('show');
             document.getElementById('loading').classList.remove('show');
             
-            // Show menu
-            document.getElementById('menuContainer').classList.remove('hide');
-            document.querySelector('.page-title').classList.remove('hide');
+            // Show menu with smooth transition
+            document.getElementById('appsGrid').classList.remove('hide');
+            document.getElementById('hero').classList.remove('hide');
+            
+            setTimeout(() => {
+                document.getElementById('appsGrid').style.opacity = '1';
+                document.getElementById('hero').style.opacity = '1';
+            }, 50);
             
             // Hide back button
-            document.querySelector('.back-btn').classList.remove('show');
+            document.querySelector('.back-btn').style.display = 'none';
             
             // Clear iframe
             document.getElementById('appFrame').src = '';
         }
 
-        // Keyboard shortcut - ESC to go back to menu
+        // Keyboard shortcuts
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 showMenu();
             }
         });
 
-        // Add smooth transitions for cards
-        document.querySelectorAll('.menu-card').forEach(card => {
+        // Smooth card animations
+        document.querySelectorAll('.app-card').forEach((card, index) => {
+            // Staggered animation on load
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+                card.style.transition = 'all 0.6s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 100);
+
+            // Enhanced hover effects
             card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-6px)';
+                this.style.transform = 'translateY(-8px) scale(1.02)';
             });
             
             card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
+                this.style.transform = 'translateY(0) scale(1)';
             });
+        });
+
+        // Parallax effect for background
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.body;
+            const speed = scrolled * 0.5;
+            parallax.style.backgroundPosition = `center ${speed}px`;
         });
     </script>
 </body>

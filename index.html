@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Apps</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            flex: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .menu-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .menu-card:hover::before {
+            left: 100%;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .iframe-container {
+            display: none;
+            width: 100%;
+            height: calc(100vh - 120px);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            margin: 2rem 0;
+        }
+
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .menu-container {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .menu-card {
+                padding: 1.5rem;
+            }
+
+            .card-icon {
+                font-size: 2.5rem;
+            }
+
+            .card-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        .show {
+            display: block !important;
+        }
+
+        .hide {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">📊 Dashboard Apps</div>
+        <button class="back-btn" onclick="showMenu()">
+            ← Kembali ke Menu
+        </button>
+    </div>
+
+    <div class="container">
+        <div class="menu-container" id="menuContainer">
+            <div class="menu-card" onclick="loadApp('stock-shopify')">
+                <span class="card-icon">🛍️</span>
+                <div class="card-title">Stock Shopify</div>
+                <div class="card-description">Kelola stok produk Shopify dengan mudah dan efisien</div>
+            </div>
+
+            <div class="menu-card" onclick="loadApp('daily-stock')">
+                <span class="card-icon">📈</span>
+                <div class="card-title">Daily Stock</div>
+                <div class="card-description">Monitor pergerakan stok harian dan analisis trend</div>
+            </div>
+
+            <div class="menu-card" onclick="loadApp('stock-meta')">
+                <span class="card-icon">🔍</span>
+                <div class="card-title">Stock Meta</div>
+                <div class="card-description">Analisis metadata dan informasi detail produk</div>
+            </div>
+
+            <div class="menu-card" onclick="loadApp('invoice-maker')">
+                <span class="card-icon">🧾</span>
+                <div class="card-title">Invoice Maker</div>
+                <div class="card-description">Buat dan kelola invoice dengan template profesional</div>
+            </div>
+
+            <div class="menu-card" onclick="loadApp('bulk-discount')">
+                <span class="card-icon">💰</span>
+                <div class="card-title">Bulk Discount</div>
+                <div class="card-description">Atur diskon massal untuk produk dengan mudah</div>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            Memuat aplikasi...
+        </div>
+
+        <div class="iframe-container" id="iframeContainer">
+            <iframe id="appFrame" src="" title="App Frame"></iframe>
+        </div>
+    </div>
+
+    <script>
+        const apps = {
+            'stock-shopify': 'https://script.google.com/macros/s/AKfycbz9sU_eKz5wqm20wXs-lo9zGeFZsA0Jtvs81SRtsXLU-macOuRryxQMpm_hNdkpph-6/exec',
+            'daily-stock': 'https://script.google.com/macros/s/AKfycbwcdNFrNTLrT0XtTo4DEgQzuZuCs-R-smDmUYdUH7AVRZdEwgDtto9FXY148wuve5KiMg/exec',
+            'stock-meta': 'https://script.google.com/macros/s/AKfycbwOdI5Ra5rMfRC8-HSKRtsPTrmbdeUC53qxfu9MDRleaa3CXeIpGNKssppCwuSOIcWJ/exec',
+            'invoice-maker': 'https://docs.google.com/spreadsheets/d/1c91PkMLc0ImL2B2wlYCL7eJES78-kka_buLi_t5DBXs/edit?gid=0#gid=0',
+            'bulk-discount': 'https://script.google.com/macros/s/AKfycbwPFlhm65jIrirZ8_1XTZ_TCJ3c4wrEdhsm_w2Ot3eAmjqlbeOTA3Ar4mNCNMqt1RO5/exec'
+        };
+
+        function loadApp(appId) {
+            const url = apps[appId];
+            if (!url) return;
+
+            // Show loading
+            document.getElementById('loading').classList.add('show');
+            document.getElementById('menuContainer').classList.add('hide');
+            
+            // Show back button
+            document.querySelector('.back-btn').classList.add('show');
+            
+            // Set iframe source
+            const iframe = document.getElementById('appFrame');
+            iframe.src = url;
+            
+            // Handle iframe load
+            iframe.onload = function() {
+                document.getElementById('loading').classList.remove('show');
+                document.getElementById('iframeContainer').classList.add('show');
+            };
+
+            // Handle iframe error
+            iframe.onerror = function() {
+                document.getElementById('loading').classList.remove('show');
+                alert('Gagal memuat aplikasi. Silakan coba lagi.');
+                showMenu();
+            };
+        }
+
+        function showMenu() {
+            // Hide iframe and loading
+            document.getElementById('iframeContainer').classList.remove('show');
+            document.getElementById('loading').classList.remove('show');
+            
+            // Show menu
+            document.getElementById('menuContainer').classList.remove('hide');
+            
+            // Hide back button
+            document.querySelector('.back-btn').classList.remove('show');
+            
+            // Clear iframe
+            document.getElementById('appFrame').src = '';
+        }
+
+        // Keyboard shortcut - ESC to go back to menu
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                showMenu();
+            }
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.menu-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

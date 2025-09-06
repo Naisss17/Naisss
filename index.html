@@ -12,149 +12,184 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #fafafa;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            color: #2d3748;
         }
 
         .header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            background: white;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #e2e8f0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
-            color: white;
+            color: #1a202c;
             font-size: 1.5rem;
-            font-weight: bold;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .back-btn {
-            background: rgba(255, 255, 255, 0.2);
+            background: #4a5568;
             border: none;
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 0.9rem;
-            transition: all 0.3s ease;
+            font-weight: 500;
+            transition: all 0.2s ease;
             display: none;
         }
 
         .back-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
+            background: #2d3748;
+            transform: translateY(-1px);
         }
 
         .container {
             flex: 1;
-            padding: 2rem;
+            padding: 3rem 2rem;
             display: flex;
             flex-direction: column;
             align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title p {
+            font-size: 1.1rem;
+            color: #718096;
         }
 
         .menu-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
             width: 100%;
         }
 
         .menu-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
+            background: white;
+            border-radius: 12px;
             padding: 2rem;
-            text-align: center;
+            text-align: left;
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid #e2e8f0;
             position: relative;
             overflow: hidden;
         }
 
-        .menu-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .menu-card:hover::before {
-            left: 100%;
-        }
-
         .menu-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #cbd5e0;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
         }
 
         .card-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
+            font-size: 2rem;
+            margin-right: 1rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f7fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
         }
 
         .card-title {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
+            color: #1a202c;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
         }
 
         .card-description {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-            line-height: 1.5;
+            color: #718096;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .card-arrow {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: #cbd5e0;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .menu-card:hover .card-arrow {
+            color: #4a5568;
+            transform: translateX(4px);
         }
 
         .iframe-container {
             display: none;
             width: 100%;
             height: calc(100vh - 120px);
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            background: white;
         }
 
         .iframe-container iframe {
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 10px;
         }
 
         .loading {
             display: none;
             text-align: center;
-            color: white;
-            font-size: 1.2rem;
-            margin: 2rem 0;
+            color: #4a5568;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 3rem 0;
         }
 
-        .loading::after {
-            content: '';
+        .loading-spinner {
             display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
+            width: 24px;
+            height: 24px;
+            border: 3px solid #e2e8f0;
             border-radius: 50%;
-            border-top-color: white;
+            border-top-color: #4a5568;
             animation: spin 1s ease-in-out infinite;
-            margin-left: 10px;
+            margin-left: 12px;
         }
 
         @keyframes spin {
@@ -163,11 +198,15 @@
 
         @media (max-width: 768px) {
             .header {
-                padding: 1rem;
+                padding: 1rem 1.5rem;
             }
 
             .container {
-                padding: 1rem;
+                padding: 2rem 1rem;
+            }
+
+            .page-title h1 {
+                font-size: 2rem;
             }
 
             .menu-container {
@@ -180,11 +219,13 @@
             }
 
             .card-icon {
-                font-size: 2.5rem;
+                font-size: 1.5rem;
+                width: 50px;
+                height: 50px;
             }
 
             .card-title {
-                font-size: 1.3rem;
+                font-size: 1.1rem;
             }
         }
 
@@ -199,47 +240,81 @@
 </head>
 <body>
     <div class="header">
-        <div class="logo">📊 Dashboard Apps</div>
+        <div class="logo">
+            <span>📊</span>
+            Dashboard Apps
+        </div>
         <button class="back-btn" onclick="showMenu()">
             ← Kembali ke Menu
         </button>
     </div>
 
     <div class="container">
+        <div class="page-title">
+            <h1>Dashboard Aplikasi</h1>
+            <p>Pilih aplikasi yang ingin Anda gunakan</p>
+        </div>
+
         <div class="menu-container" id="menuContainer">
             <div class="menu-card" onclick="loadApp('stock-shopify')">
-                <span class="card-icon">🛍️</span>
-                <div class="card-title">Stock Shopify</div>
-                <div class="card-description">Kelola stok produk Shopify dengan mudah dan efisien</div>
+                <div class="card-header">
+                    <div class="card-icon">🛍️</div>
+                    <div>
+                        <div class="card-title">Stock Shopify</div>
+                    </div>
+                </div>
+                <div class="card-description">Kelola stok produk Shopify dengan mudah dan efisien. Monitor inventory dan update stok secara real-time.</div>
+                <div class="card-arrow">→</div>
             </div>
 
             <div class="menu-card" onclick="loadApp('daily-stock')">
-                <span class="card-icon">📈</span>
-                <div class="card-title">Daily Stock</div>
-                <div class="card-description">Monitor pergerakan stok harian dan analisis trend</div>
+                <div class="card-header">
+                    <div class="card-icon">📈</div>
+                    <div>
+                        <div class="card-title">Daily Stock</div>
+                    </div>
+                </div>
+                <div class="card-description">Monitor pergerakan stok harian dan analisis trend. Dashboard lengkap untuk tracking inventory.</div>
+                <div class="card-arrow">→</div>
             </div>
 
             <div class="menu-card" onclick="loadApp('stock-meta')">
-                <span class="card-icon">🔍</span>
-                <div class="card-title">Stock Meta</div>
-                <div class="card-description">Analisis metadata dan informasi detail produk</div>
+                <div class="card-header">
+                    <div class="card-icon">🔍</div>
+                    <div>
+                        <div class="card-title">Stock Meta</div>
+                    </div>
+                </div>
+                <div class="card-description">Analisis metadata dan informasi detail produk. Kelola data produk dengan sistem yang terintegrasi.</div>
+                <div class="card-arrow">→</div>
             </div>
 
             <div class="menu-card" onclick="loadApp('invoice-maker')">
-                <span class="card-icon">🧾</span>
-                <div class="card-title">Invoice Maker</div>
-                <div class="card-description">Buat dan kelola invoice dengan template profesional</div>
+                <div class="card-header">
+                    <div class="card-icon">🧾</div>
+                    <div>
+                        <div class="card-title">Invoice Maker</div>
+                    </div>
+                </div>
+                <div class="card-description">Buat dan kelola invoice dengan template profesional. Sistem billing yang mudah digunakan.</div>
+                <div class="card-arrow">→</div>
             </div>
 
             <div class="menu-card" onclick="loadApp('bulk-discount')">
-                <span class="card-icon">💰</span>
-                <div class="card-title">Bulk Discount</div>
-                <div class="card-description">Atur diskon massal untuk produk dengan mudah</div>
+                <div class="card-header">
+                    <div class="card-icon">💰</div>
+                    <div>
+                        <div class="card-title">Bulk Discount</div>
+                    </div>
+                </div>
+                <div class="card-description">Atur diskon massal untuk produk dengan mudah. Kelola promosi dan pricing strategy secara efektif.</div>
+                <div class="card-arrow">→</div>
             </div>
         </div>
 
         <div class="loading" id="loading">
             Memuat aplikasi...
+            <div class="loading-spinner"></div>
         </div>
 
         <div class="iframe-container" id="iframeContainer">
@@ -263,6 +338,7 @@
             // Show loading
             document.getElementById('loading').classList.add('show');
             document.getElementById('menuContainer').classList.add('hide');
+            document.querySelector('.page-title').classList.add('hide');
             
             // Show back button
             document.querySelector('.back-btn').classList.add('show');
@@ -292,6 +368,7 @@
             
             // Show menu
             document.getElementById('menuContainer').classList.remove('hide');
+            document.querySelector('.page-title').classList.remove('hide');
             
             // Hide back button
             document.querySelector('.back-btn').classList.remove('show');
@@ -307,14 +384,14 @@
             }
         });
 
-        // Add some interactive effects
+        // Add smooth transitions for cards
         document.querySelectorAll('.menu-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
+                this.style.transform = 'translateY(-6px)';
             });
             
             card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
+                this.style.transform = 'translateY(0)';
             });
         });
     </script>

@@ -83,6 +83,93 @@
             margin-bottom: 4rem;
         }
 
+        .pokemon-animation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+            height: 120px;
+        }
+
+        .pokeball {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(180deg, #ff4444 0%, #ff4444 50%, white 50%, white 100%);
+            border-radius: 50%;
+            position: relative;
+            border: 3px solid #333;
+            animation: pokeball-shake 2s infinite;
+        }
+
+        .pokeball::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            border: 3px solid #333;
+            z-index: 2;
+        }
+
+        .pokeball::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #333;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .pikachu {
+            font-size: 3rem;
+            position: absolute;
+            right: -100px;
+            animation: pikachu-caught 4s infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.5));
+        }
+
+        @keyframes pokeball-shake {
+            0%, 100% { transform: rotate(0deg); }
+            10%, 30%, 50%, 70%, 90% { transform: rotate(-10deg); }
+            20%, 40%, 60%, 80% { transform: rotate(10deg); }
+        }
+
+        @keyframes pikachu-caught {
+            0% { 
+                right: -100px; 
+                opacity: 1; 
+                transform: scale(1);
+            }
+            20% { 
+                right: 60px; 
+                opacity: 1; 
+                transform: scale(1.1);
+            }
+            30% { 
+                right: 60px; 
+                opacity: 0.7; 
+                transform: scale(0.8);
+            }
+            35% { 
+                right: 60px; 
+                opacity: 0; 
+                transform: scale(0.3);
+            }
+            36%, 100% { 
+                right: -100px; 
+                opacity: 1; 
+                transform: scale(1);
+            }
+        }
+
         .hero h1 {
             font-size: 3rem;
             font-weight: 800;
@@ -186,6 +273,7 @@
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #000000;
         }
 
         .iframe-container iframe {
@@ -236,6 +324,25 @@
 
             .hero h1 {
                 font-size: 2.2rem;
+            }
+
+            .pokemon-animation {
+                height: 100px;
+                margin-bottom: 1.5rem;
+            }
+
+            .pokeball {
+                width: 60px;
+                height: 60px;
+            }
+
+            .pokeball::before {
+                width: 15px;
+                height: 15px;
+            }
+
+            .pikachu {
+                font-size: 2.5rem;
             }
 
             .apps-grid {
@@ -303,6 +410,10 @@
 
     <div class="container">
         <div class="hero" id="hero">
+            <div class="pokemon-animation">
+                <div class="pokeball"></div>
+                <div class="pikachu">⚡</div>
+            </div>
             <h1>Naisss Dashboard</h1>
             <p>Pilih apa yang akan anda gunakan</p>
         </div>
@@ -387,6 +498,7 @@
                 // Handle iframe load
                 iframe.onload = function() {
                     document.getElementById('loading').classList.remove('show');
+                    document.getElementById('iframeContainer').style.display = 'block';
                     document.getElementById('iframeContainer').classList.add('show');
                 };
 
@@ -400,9 +512,13 @@
         }
 
         function showMenu() {
-            // Hide iframe and loading
-            document.getElementById('iframeContainer').classList.remove('show');
-            document.getElementById('iframeContainer').style.display = 'none';
+            // Hide iframe and loading with proper display management
+            const iframeContainer = document.getElementById('iframeContainer');
+            iframeContainer.classList.remove('show');
+            setTimeout(() => {
+                iframeContainer.style.display = 'none';
+            }, 100);
+            
             document.getElementById('loading').classList.remove('show');
             
             // Show menu with smooth transition

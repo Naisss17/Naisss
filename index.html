@@ -33,24 +33,8 @@
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo-icon {
-            font-size: 1.8rem;
         }
 
         .back-btn {
@@ -99,7 +83,7 @@
             border-radius: 50%;
             position: relative;
             border: 3px solid #333;
-            animation: pokeball-shake 2s infinite;
+            animation: pokeball-bounce 2s ease-in-out infinite;
         }
 
         .pokeball::before {
@@ -128,45 +112,15 @@
             z-index: 1;
         }
 
-        .pikachu {
-            font-size: 3rem;
-            position: absolute;
-            right: -100px;
-            animation: pikachu-caught 4s infinite;
-            filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.5));
-        }
-
-        @keyframes pokeball-shake {
-            0%, 100% { transform: rotate(0deg); }
-            10%, 30%, 50%, 70%, 90% { transform: rotate(-10deg); }
-            20%, 40%, 60%, 80% { transform: rotate(10deg); }
-        }
-
-        @keyframes pikachu-caught {
-            0% { 
-                right: -100px; 
-                opacity: 1; 
-                transform: scale(1);
+        @keyframes pokeball-bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
             }
-            20% { 
-                right: 60px; 
-                opacity: 1; 
-                transform: scale(1.1);
+            40% {
+                transform: translateY(-20px);
             }
-            30% { 
-                right: 60px; 
-                opacity: 0.7; 
-                transform: scale(0.8);
-            }
-            35% { 
-                right: 60px; 
-                opacity: 0; 
-                transform: scale(0.3);
-            }
-            36%, 100% { 
-                right: -100px; 
-                opacity: 1; 
-                transform: scale(1);
+            60% {
+                transform: translateY(-10px);
             }
         }
 
@@ -205,6 +159,7 @@
             position: relative;
             backdrop-filter: blur(10px);
             overflow: hidden;
+            text-align: center;
         }
 
         .app-card::before {
@@ -341,10 +296,6 @@
                 height: 15px;
             }
 
-            .pikachu {
-                font-size: 2.5rem;
-            }
-
             .apps-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
@@ -364,10 +315,6 @@
 
             .header {
                 padding: 1rem 1.5rem;
-            }
-
-            .logo {
-                font-size: 1.3rem;
             }
         }
 
@@ -398,10 +345,6 @@
 <body>
     <div class="header">
         <div class="header-content">
-            <div class="logo">
-                <span class="logo-icon">⚡</span>
-                Dashboard
-            </div>
             <button class="back-btn" onclick="showMenu()">
                 ← Kembali
             </button>
@@ -412,7 +355,6 @@
         <div class="hero" id="hero">
             <div class="pokemon-animation">
                 <div class="pokeball"></div>
-                <div class="pikachu">⚡</div>
             </div>
             <h1>Naisss Dashboard</h1>
             <p>Pilih apa yang akan anda gunakan</p>
@@ -498,7 +440,6 @@
                 // Handle iframe load
                 iframe.onload = function() {
                     document.getElementById('loading').classList.remove('show');
-                    document.getElementById('iframeContainer').style.display = 'block';
                     document.getElementById('iframeContainer').classList.add('show');
                 };
 
@@ -512,13 +453,10 @@
         }
 
         function showMenu() {
-            // Hide iframe and loading with proper display management
+            // Hide iframe and loading properly
             const iframeContainer = document.getElementById('iframeContainer');
             iframeContainer.classList.remove('show');
-            setTimeout(() => {
-                iframeContainer.style.display = 'none';
-            }, 100);
-            
+            iframeContainer.style.display = 'none';
             document.getElementById('loading').classList.remove('show');
             
             // Show menu with smooth transition
@@ -533,8 +471,11 @@
             // Hide back button
             document.querySelector('.back-btn').style.display = 'none';
             
-            // Clear iframe
-            document.getElementById('appFrame').src = '';
+            // Clear iframe to prevent white background
+            const iframe = document.getElementById('appFrame');
+            iframe.src = '';
+            iframe.onload = null;
+            iframe.onerror = null;
         }
 
         // Keyboard shortcuts

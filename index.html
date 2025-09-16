@@ -220,19 +220,17 @@
             transform: translate(4px, -4px);
         }
 
-        /* Lockscreen Styles - FIXED POSITIONING */
+        /* Lockscreen Styles - FIXED POSITIONING WITH CLEAR BLACK BACKGROUND */
         .lockscreen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(45, 45, 45, 0.95) 100%);
+            background: #000000;
             display: none;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
             z-index: 1000;
-            backdrop-filter: blur(20px);
         }
 
         .lockscreen.show {
@@ -245,16 +243,61 @@
             to { opacity: 1; }
         }
 
+        /* Lockscreen header with back button */
+        .lockscreen-header {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem 2rem;
+            position: relative;
+            z-index: 101;
+        }
+
+        .lockscreen-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .lockscreen-back-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .lockscreen-back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Lockscreen content - perfectly centered */
+        .lockscreen-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
         .lock-container {
             text-align: center;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(15, 15, 15, 0.9);
             padding: 3rem 2rem;
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(20px);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
             max-width: 400px;
-            width: 90%;
+            width: 100%;
             animation: slideUp 0.4s ease-out;
             position: relative;
         }
@@ -491,6 +534,10 @@
                 padding: 1rem 1.5rem;
             }
 
+            .lockscreen-header {
+                padding: 1rem 1.5rem;
+            }
+
             .lock-container {
                 padding: 2rem 1.5rem;
                 max-width: 350px;
@@ -616,35 +663,45 @@
 
     <!-- Lockscreen Modal -->
     <div class="lockscreen" id="lockscreen">
-        <div class="lock-container">
-            <div class="lock-icon">🔒</div>
-            <h2 class="lock-title">Akses Terbatas</h2>
-            <p class="lock-subtitle">Masukkan password untuk mengakses Grab Corporate</p>
-            
-            <div class="password-display">
-                <div class="password-dot" id="dot1"></div>
-                <div class="password-dot" id="dot2"></div>
-                <div class="password-dot" id="dot3"></div>
-                <div class="password-dot" id="dot4"></div>
-                <div class="password-dot" id="dot5"></div>
-                <div class="password-dot" id="dot6"></div>
+        <div class="lockscreen-header">
+            <div class="lockscreen-header-content">
+                <button class="lockscreen-back-btn" onclick="closeLockscreen()">
+                    ← Kembali
+                </button>
             </div>
+        </div>
+        
+        <div class="lockscreen-content">
+            <div class="lock-container">
+                <div class="lock-icon">🔒</div>
+                <h2 class="lock-title">Akses Terbatas</h2>
+                <p class="lock-subtitle">Masukkan password untuk mengakses Grab Corporate</p>
+                
+                <div class="password-display">
+                    <div class="password-dot" id="dot1"></div>
+                    <div class="password-dot" id="dot2"></div>
+                    <div class="password-dot" id="dot3"></div>
+                    <div class="password-dot" id="dot4"></div>
+                    <div class="password-dot" id="dot5"></div>
+                    <div class="password-dot" id="dot6"></div>
+                </div>
 
-            <div class="keypad">
-                <button class="keypad-btn" onclick="addDigit('1')">1</button>
-                <button class="keypad-btn" onclick="addDigit('2')">2</button>
-                <button class="keypad-btn" onclick="addDigit('3')">3</button>
-                <button class="keypad-btn" onclick="addDigit('4')">4</button>
-                <button class="keypad-btn" onclick="addDigit('5')">5</button>
-                <button class="keypad-btn" onclick="addDigit('6')">6</button>
-                <button class="keypad-btn" onclick="addDigit('7')">7</button>
-                <button class="keypad-btn" onclick="addDigit('8')">8</button>
-                <button class="keypad-btn" onclick="addDigit('9')">9</button>
-                <button class="keypad-btn zero" onclick="addDigit('0')">0</button>
+                <div class="keypad">
+                    <button class="keypad-btn" onclick="addDigit('1')">1</button>
+                    <button class="keypad-btn" onclick="addDigit('2')">2</button>
+                    <button class="keypad-btn" onclick="addDigit('3')">3</button>
+                    <button class="keypad-btn" onclick="addDigit('4')">4</button>
+                    <button class="keypad-btn" onclick="addDigit('5')">5</button>
+                    <button class="keypad-btn" onclick="addDigit('6')">6</button>
+                    <button class="keypad-btn" onclick="addDigit('7')">7</button>
+                    <button class="keypad-btn" onclick="addDigit('8')">8</button>
+                    <button class="keypad-btn" onclick="addDigit('9')">9</button>
+                    <button class="keypad-btn zero" onclick="addDigit('0')">0</button>
+                </div>
+
+                <button class="clear-btn" onclick="clearPassword()">Hapus</button>
+                <div class="error-message" id="errorMessage">Password salah! Coba lagi.</div>
             </div>
-
-            <button class="clear-btn" onclick="clearPassword()">Hapus</button>
-            <div class="error-message" id="errorMessage">Password salah! Coba lagi.</div>
         </div>
     </div>
 
@@ -782,6 +839,13 @@
             document.getElementById('errorMessage').classList.remove('show');
         }
 
+        function closeLockscreen() {
+            document.getElementById('lockscreen').classList.remove('show');
+            currentPassword = '';
+            updatePasswordDots();
+            document.getElementById('errorMessage').classList.remove('show');
+        }
+
         function showMenu() {
             // Hide lockscreen if shown
             document.getElementById('lockscreen').classList.remove('show');
@@ -817,7 +881,7 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 if (document.getElementById('lockscreen').classList.contains('show')) {
-                    document.getElementById('lockscreen').classList.remove('show');
+                    closeLockscreen();
                 } else {
                     showMenu();
                 }
@@ -833,13 +897,6 @@
                 } else if (e.key === 'Delete') {
                     clearPassword();
                 }
-            }
-        });
-
-        // Click outside lockscreen to close
-        document.getElementById('lockscreen').addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('show');
             }
         });
 

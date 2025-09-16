@@ -220,6 +220,179 @@
             transform: translate(4px, -4px);
         }
 
+        /* Lockscreen Styles */
+        .lockscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+        }
+
+        .lockscreen.show {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .lock-container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            width: 90%;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lock-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: #667eea;
+            animation: lockPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes lockPulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .lock-title {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .lock-subtitle {
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .password-display {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .password-dot {
+            width: 15px;
+            height: 15px;
+            border: 2px solid #667eea;
+            border-radius: 50%;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .password-dot.filled {
+            background: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+            transform: scale(1.2);
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            max-width: 240px;
+            margin: 0 auto 2rem;
+        }
+
+        .keypad-btn {
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .keypad-btn:hover {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+
+        .keypad-btn:active {
+            transform: scale(0.95);
+            background: rgba(102, 126, 234, 0.4);
+        }
+
+        .keypad-btn.zero {
+            grid-column: 2;
+        }
+
+        .clear-btn {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            border: none;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .clear-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .error-message.show {
+            opacity: 1;
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 20%, 40%, 60%, 80%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+        }
+
         .iframe-container {
             display: none;
             width: 100%;
@@ -316,6 +489,20 @@
             .header {
                 padding: 1rem 1.5rem;
             }
+
+            .lock-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .lock-icon {
+                font-size: 3rem;
+            }
+
+            .keypad-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
         }
 
         /* Smooth scrolling */
@@ -395,10 +582,18 @@
                 <p class="card-description">Bulk update price yang ada di Web.</p>
                 <div class="card-arrow">→</div>
             </div>
+            
             <div class="app-card" onclick="loadApp('master-stock')">
                 <span class="card-icon">👀</span>
                 <h3 class="card-title">Master Stock</h3>
                 <p class="card-description">Melihat dan Mengedit Master Stock untuk Seluruh Sheet.</p>
+                <div class="card-arrow">→</div>
+            </div>
+
+            <div class="app-card" onclick="loadApp('grab-coorporate')">
+                <span class="card-icon">📦</span>
+                <h3 class="card-title">Grab Coorporate</h3>
+                <p class="card-description">Voucher Grab Coorporate Web bulan September.</p>
                 <div class="card-arrow">→</div>
             </div>
         </div>
@@ -413,6 +608,40 @@
         </div>
     </div>
 
+    <!-- Lockscreen Modal -->
+    <div class="lockscreen" id="lockscreen">
+        <div class="lock-container">
+            <div class="lock-icon">🔒</div>
+            <h2 class="lock-title">Akses Terbatas</h2>
+            <p class="lock-subtitle">Masukkan password untuk mengakses Grab Corporate</p>
+            
+            <div class="password-display">
+                <div class="password-dot" id="dot1"></div>
+                <div class="password-dot" id="dot2"></div>
+                <div class="password-dot" id="dot3"></div>
+                <div class="password-dot" id="dot4"></div>
+                <div class="password-dot" id="dot5"></div>
+                <div class="password-dot" id="dot6"></div>
+            </div>
+
+            <div class="keypad">
+                <button class="keypad-btn" onclick="addDigit('1')">1</button>
+                <button class="keypad-btn" onclick="addDigit('2')">2</button>
+                <button class="keypad-btn" onclick="addDigit('3')">3</button>
+                <button class="keypad-btn" onclick="addDigit('4')">4</button>
+                <button class="keypad-btn" onclick="addDigit('5')">5</button>
+                <button class="keypad-btn" onclick="addDigit('6')">6</button>
+                <button class="keypad-btn" onclick="addDigit('7')">7</button>
+                <button class="keypad-btn" onclick="addDigit('8')">8</button>
+                <button class="keypad-btn" onclick="addDigit('9')">9</button>
+                <button class="keypad-btn zero" onclick="addDigit('0')">0</button>
+            </div>
+
+            <button class="clear-btn" onclick="clearPassword()">Hapus</button>
+            <div class="error-message" id="errorMessage">Password salah! Coba lagi.</div>
+        </div>
+    </div>
+
     <script>
         const apps = {
             'stock-shopify': 'https://script.google.com/macros/s/AKfycbz9sU_eKz5wqm20wXs-lo9zGeFZsA0Jtvs81SRtsXLU-macOuRryxQMpm_hNdkpph-6/exec',
@@ -420,10 +649,22 @@
             'stock-meta': 'https://script.google.com/macros/s/AKfycbwOdI5Ra5rMfRC8-HSKRtsPTrmbdeUC53qxfu9MDRleaa3CXeIpGNKssppCwuSOIcWJ/exec',
             'invoice-maker': 'https://docs.google.com/spreadsheets/d/1c91PkMLc0ImL2B2wlYCL7eJES78-kka_buLi_t5DBXs/edit?gid=0#gid=0',
             'bulk-discount': 'https://script.google.com/macros/s/AKfycbwPFlhm65jIrirZ8_1XTZ_TCJ3c4wrEdhsm_w2Ot3eAmjqlbeOTA3Ar4mNCNMqt1RO5/exec',
-            'master-stock': 'https://docs.google.com/spreadsheets/d/1jmpLH96B22KenmhF0e9ZYN79_39cyk39aSopWiH7bM8/edit?gid=0#gid=0'
+            'master-stock': 'https://docs.google.com/spreadsheets/d/1jmpLH96B22KenmhF0e9ZYN79_39cyk39aSopWiH7bM8/edit?gid=0#gid=0',
+            'grab-coorporate':'https://docs.google.com/spreadsheets/d/1fHSqP-J6wnsAXTE4aXqK7Y_uKCjqsxLp/edit?gid=1243382585#gid=1243382585'
         };
 
+        let currentPassword = '';
+        const correctPassword = '172701';
+
         function loadApp(appId) {
+            // Check if it's grab-corporate and show lockscreen
+            if (appId === 'grab-coorporate') {
+                document.getElementById('lockscreen').classList.add('show');
+                currentPassword = '';
+                updatePasswordDots();
+                return;
+            }
+
             const url = apps[appId];
             if (!url) return;
 
@@ -459,7 +700,88 @@
             }, 200);
         }
 
+        function addDigit(digit) {
+            if (currentPassword.length < 6) {
+                currentPassword += digit;
+                updatePasswordDots();
+                
+                // Check password when complete
+                if (currentPassword.length === 6) {
+                    setTimeout(checkPassword, 300);
+                }
+            }
+        }
+
+        function updatePasswordDots() {
+            for (let i = 1; i <= 6; i++) {
+                const dot = document.getElementById(`dot${i}`);
+                if (i <= currentPassword.length) {
+                    dot.classList.add('filled');
+                } else {
+                    dot.classList.remove('filled');
+                }
+            }
+        }
+
+        function checkPassword() {
+            const errorMessage = document.getElementById('errorMessage');
+            
+            if (currentPassword === correctPassword) {
+                // Correct password - hide lockscreen and load app
+                document.getElementById('lockscreen').classList.remove('show');
+                
+                // Load the grab-corporate app
+                const url = apps['grab-coorporate'];
+                document.getElementById('appsGrid').style.opacity = '0';
+                document.getElementById('hero').style.opacity = '0';
+                
+                setTimeout(() => {
+                    document.getElementById('loading').classList.add('show');
+                    document.getElementById('appsGrid').classList.add('hide');
+                    document.getElementById('hero').classList.add('hide');
+                    document.querySelector('.back-btn').style.display = 'block';
+                    
+                    const iframe = document.getElementById('appFrame');
+                    iframe.src = url;
+                    
+                    iframe.onload = function() {
+                        document.getElementById('loading').classList.remove('show');
+                        document.getElementById('iframeContainer').classList.add('show');
+                    };
+
+                    iframe.onerror = function() {
+                        document.getElementById('loading').classList.remove('show');
+                        alert('Gagal memuat aplikasi. Silakan coba lagi.');
+                        showMenu();
+                    };
+                }, 200);
+            } else {
+                // Wrong password - show error and reset
+                errorMessage.classList.add('show');
+                setTimeout(() => {
+                    errorMessage.classList.remove('show');
+                }, 3000);
+                
+                // Reset password after delay
+                setTimeout(() => {
+                    currentPassword = '';
+                    updatePasswordDots();
+                }, 1500);
+            }
+        }
+
+        function clearPassword() {
+            currentPassword = '';
+            updatePasswordDots();
+            document.getElementById('errorMessage').classList.remove('show');
+        }
+
         function showMenu() {
+            // Hide lockscreen if shown
+            document.getElementById('lockscreen').classList.remove('show');
+            currentPassword = '';
+            updatePasswordDots();
+            
             // Hide iframe and loading properly
             const iframeContainer = document.getElementById('iframeContainer');
             iframeContainer.classList.remove('show');
@@ -488,7 +810,30 @@
         // Keyboard shortcuts
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                showMenu();
+                if (document.getElementById('lockscreen').classList.contains('show')) {
+                    document.getElementById('lockscreen').classList.remove('show');
+                } else {
+                    showMenu();
+                }
+            }
+            
+            // Handle numeric input for lockscreen
+            if (document.getElementById('lockscreen').classList.contains('show')) {
+                if (e.key >= '0' && e.key <= '9') {
+                    addDigit(e.key);
+                } else if (e.key === 'Backspace') {
+                    currentPassword = currentPassword.slice(0, -1);
+                    updatePasswordDots();
+                } else if (e.key === 'Delete') {
+                    clearPassword();
+                }
+            }
+        });
+
+        // Click outside lockscreen to close
+        document.getElementById('lockscreen').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('show');
             }
         });
 

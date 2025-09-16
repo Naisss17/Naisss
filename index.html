@@ -596,10 +596,10 @@
                 <div class="card-arrow">→</div>
             </div>
 
-            <div class="app-card" onclick="loadApp('grab-coorporate')">
+            <div class="app-card" onclick="loadApp('grab-corporate')">
                 <span class="card-icon">📦</span>
-                <h3 class="card-title">Grab Coorporate</h3>
-                <p class="card-description">Voucher Grab Coorporate Web bulan September.</p>
+                <h3 class="card-title">Grab Corporate</h3>
+                <p class="card-description">Voucher Grab Corporate Web bulan September.</p>
                 <div class="card-arrow">→</div>
             </div>
         </div>
@@ -656,7 +656,7 @@
             'invoice-maker': 'https://docs.google.com/spreadsheets/d/1c91PkMLc0ImL2B2wlYCL7eJES78-kka_buLi_t5DBXs/edit?gid=0#gid=0',
             'bulk-discount': 'https://script.google.com/macros/s/AKfycbwPFlhm65jIrirZ8_1XTZ_TCJ3c4wrEdhsm_w2Ot3eAmjqlbeOTA3Ar4mNCNMqt1RO5/exec',
             'master-stock': 'https://docs.google.com/spreadsheets/d/1jmpLH96B22KenmhF0e9ZYN79_39cyk39aSopWiH7bM8/edit?gid=0#gid=0',
-            'grab-coorporate':'https://docs.google.com/spreadsheets/d/1fHSqP-J6wnsAXTE4aXqK7Y_uKCjqsxLp/edit?gid=1243382585#gid=1243382585'
+            'grab-corporate':'https://docs.google.com/spreadsheets/d/1fHSqP-J6wnsAXTE4aXqK7Y_uKCjqsxLp/edit?gid=1243382585#gid=1243382585'
         };
 
         let currentPassword = '';
@@ -664,7 +664,7 @@
 
         function loadApp(appId) {
             // Check if it's grab-corporate and show lockscreen
-            if (appId === 'grab-coorporate') {
+            if (appId === 'grab-corporate') {
                 document.getElementById('lockscreen').classList.add('show');
                 currentPassword = '';
                 updatePasswordDots();
@@ -737,7 +737,7 @@
                 document.getElementById('lockscreen').classList.remove('show');
                 
                 // Load the grab-corporate app
-                const url = apps['grab-coorporate'];
+                const url = apps['grab-corporate'];
                 document.getElementById('appsGrid').style.opacity = '0';
                 document.getElementById('hero').style.opacity = '0';
                 

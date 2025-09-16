@@ -751,6 +751,9 @@
         }
 
         function addDigit(digit) {
+            const keySound = document.getElementById('keySound');
+            keySound.currentTime = 0; // reset biar bisa ditekan cepat
+            keySound.play();
             if (currentPassword.length < 6) {
                 currentPassword += digit;
                 updatePasswordDots();
@@ -909,5 +912,6 @@
             });
         });
     </script>
+    <audio id="keySound" src="click.mp3" preload="auto"></audio>
 </body>
 </html>

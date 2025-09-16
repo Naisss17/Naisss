@@ -33,7 +33,7 @@
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            justify-content: flex-end;
+            justify-content: flex-start;
             align-items: center;
         }
 
@@ -257,7 +257,7 @@
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            justify-content: flex-end;
+            justify-content: flex-start;
             align-items: center;
         }
 
@@ -320,46 +320,33 @@
             animation: lockPulse 2s ease-in-out infinite;
         }
 
-        @keyframes lockPulse {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
-        }
+    @keyframes lockPulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; }
+    }
 
-        .lock-title {
-            font-size: 1.5rem;
-            color: #ffffff;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
+    .lock-icon.shake {
+      animation: shake-lock 0.6s ease-in-out;
+    }
 
-        .lock-subtitle {
-            color: #94a3b8;
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-        }
+    @keyframes shake-lock {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-10px); }
+      40%, 80% { transform: translateX(10px); }
+    }
 
-        .password-display {
-            display: flex;
-            justify-content: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-        }
+    .lock-title { font-size: 1.5rem; color: #fff; font-weight: 600; margin-bottom: 0.5rem; }
+    .lock-subtitle { color: #94a3b8; margin-bottom: 2rem; font-size: 0.9rem; }
 
-        .password-dot {
-            width: 15px;
-            height: 15px;
-            border: 2px solid #667eea;
-            border-radius: 50%;
-            background: transparent;
-            transition: all 0.3s ease;
-        }
+    .password-display { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; }
+    .password-dot { width: 15px; height: 15px; border: 2px solid #667eea; border-radius: 50%; }
 
-        .password-dot.filled {
-            background: #667eea;
-            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
-            transform: scale(1.2);
-        }
-
+    .password-dot.filled {
+      background: #667eea;
+      box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+      transform: scale(1.2);
+    }
+        
         .keypad {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -652,7 +639,7 @@
         </div>
 
         <div class="loading" id="loading">
-            <div class="loading-text">Memuat aplikasi...</div>
+            <div class="loading-text">Kela loading.. sing sabar 😇</div>
             <div class="loading-spinner"></div>
         </div>
 
@@ -662,48 +649,48 @@
     </div>
 
     <!-- Lockscreen Modal -->
-    <div class="lockscreen" id="lockscreen">
-        <div class="lockscreen-header">
-            <div class="lockscreen-header-content">
-                <button class="lockscreen-back-btn" onclick="closeLockscreen()">
-                    ← Kembali
-                </button>
-            </div>
-        </div>
-        
-        <div class="lockscreen-content">
-            <div class="lock-container">
-                <div class="lock-icon">🔒</div>
-                <h2 class="lock-title">Akses Terbatas</h2>
-                <p class="lock-subtitle">Hayoo passwordnya apa 👀</p>
-                
-                <div class="password-display">
-                    <div class="password-dot" id="dot1"></div>
-                    <div class="password-dot" id="dot2"></div>
-                    <div class="password-dot" id="dot3"></div>
-                    <div class="password-dot" id="dot4"></div>
-                    <div class="password-dot" id="dot5"></div>
-                    <div class="password-dot" id="dot6"></div>
-                </div>
-
-                <div class="keypad">
-                    <button class="keypad-btn" onclick="addDigit('1')">1</button>
-                    <button class="keypad-btn" onclick="addDigit('2')">2</button>
-                    <button class="keypad-btn" onclick="addDigit('3')">3</button>
-                    <button class="keypad-btn" onclick="addDigit('4')">4</button>
-                    <button class="keypad-btn" onclick="addDigit('5')">5</button>
-                    <button class="keypad-btn" onclick="addDigit('6')">6</button>
-                    <button class="keypad-btn" onclick="addDigit('7')">7</button>
-                    <button class="keypad-btn" onclick="addDigit('8')">8</button>
-                    <button class="keypad-btn" onclick="addDigit('9')">9</button>
-                    <button class="keypad-btn zero" onclick="addDigit('0')">0</button>
-                </div>
-
-                <button class="clear-btn" onclick="clearPassword()">Hapus</button>
-                <div class="error-message" id="errorMessage">Password salah! Coba lagi.</div>
-            </div>
+<div class="lockscreen" id="lockscreen">
+    <div class="lockscreen-header">
+        <div class="lockscreen-header-content">
+            <button class="lockscreen-back-btn" onclick="closeLockscreen()">
+                ← Kembali
+            </button>
         </div>
     </div>
+    
+    <div class="lockscreen-content">
+        <div class="lock-container">
+            <div class="lock-icon" id="lockIcon">🔒</div>
+            <h2 class="lock-title">Limited Editon</h2>
+            <p class="lock-subtitle">Hayoo passwordnya apa 👀</p>
+            <div class="error-message" id="errorMessage">Salah 😋</div>
+            
+            <div class="password-display">
+                <div class="password-dot" id="dot1"></div>
+                <div class="password-dot" id="dot2"></div>
+                <div class="password-dot" id="dot3"></div>
+                <div class="password-dot" id="dot4"></div>
+                <div class="password-dot" id="dot5"></div>
+                <div class="password-dot" id="dot6"></div>
+            </div>
+
+            <div class="keypad">
+                <button class="keypad-btn" onclick="addDigit('1')">1</button>
+                <button class="keypad-btn" onclick="addDigit('2')">2</button>
+                <button class="keypad-btn" onclick="addDigit('3')">3</button>
+                <button class="keypad-btn" onclick="addDigit('4')">4</button>
+                <button class="keypad-btn" onclick="addDigit('5')">5</button>
+                <button class="keypad-btn" onclick="addDigit('6')">6</button>
+                <button class="keypad-btn" onclick="addDigit('7')">7</button>
+                <button class="keypad-btn" onclick="addDigit('8')">8</button>
+                <button class="keypad-btn" onclick="addDigit('9')">9</button>
+                <button class="keypad-btn zero" onclick="addDigit('0')">0</button>
+            </div>
+
+            <button class="clear-btn" onclick="clearPassword()">Hapus</button>
+        </div>
+    </div>
+</div>
 
     <script>
         const apps = {
@@ -788,7 +775,7 @@
 
         function checkPassword() {
             const errorMessage = document.getElementById('errorMessage');
-            
+            const lockIcon = document.getElementById('lockIcon');
             if (currentPassword === correctPassword) {
                 // Correct password - hide lockscreen and load app
                 document.getElementById('lockscreen').classList.remove('show');
@@ -821,9 +808,9 @@
             } else {
                 // Wrong password - show error and reset
                 errorMessage.classList.add('show');
-                setTimeout(() => {
-                    errorMessage.classList.remove('show');
-                }, 3000);
+                lockIcon.classList.add('shake');
+                setTimeout(()=>lockIcon.classList.remove('shake'),600);
+                setTimeout(()=>errorMessage.classList.remove('show'),3000);
                 
                 // Reset password after delay
                 setTimeout(() => {

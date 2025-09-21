@@ -38,9 +38,9 @@
         }
 
         .back-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
             border: none;
-            color: white;
+            color: black;
             padding: 0.75rem 1.5rem;
             border-radius: 25px;
             cursor: pointer;
@@ -218,6 +218,25 @@
         .app-card:hover .card-arrow {
             color: rgba(255, 255, 255, 0.7);
             transform: translate(4px, -4px);
+        }
+
+        /* Special styling for new tab cards */
+        .app-card.new-tab {
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            background: rgba(34, 197, 94, 0.05);
+        }
+
+        .app-card.new-tab:hover {
+            border-color: rgba(34, 197, 94, 0.5);
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .app-card.new-tab .card-arrow {
+            color: rgba(34, 197, 94, 0.6);
+        }
+
+        .app-card.new-tab:hover .card-arrow {
+            color: rgba(34, 197, 94, 0.9);
         }
 
         /* Lockscreen Styles - FIXED POSITIONING WITH CLEAR BLACK BACKGROUND */
@@ -609,11 +628,11 @@
                 <div class="card-arrow">→</div>
             </div>
 
-            <div class="app-card" onclick="loadApp('invoice-maker')">
+            <div class="app-card new-tab" onclick="openInNewTab('invoice-maker')">
                 <span class="card-icon">🧾</span>
                 <h3 class="card-title">Invoice Maker</h3>
                 <p class="card-description">Pembuat invoice Bulk Order.</p>
-                <div class="card-arrow">→</div>
+                <div class="card-arrow">↗</div>
             </div>
 
             <div class="app-card" onclick="loadApp('bulk-discount')">
@@ -637,11 +656,11 @@
                 <div class="card-arrow">→</div>
             </div>
 
-            <div class="app-card" onclick="loadApp('thres-hold')">
+            <div class="app-card new-tab" onclick="openInNewTab('thres-hold')">
                 <span class="card-icon">💰</span>
                 <h3 class="card-title">Threshold</h3>
                 <p class="card-description">Melihat Qty untuk Bulk Order.</p>
-                <div class="card-arrow">→</div>
+                <div class="card-arrow">↗</div>
             </div>
         </div>
 
@@ -714,6 +733,13 @@
         let currentPassword = '';
         const correctPassword = '172701';
 
+        function openInNewTab(appId) {
+            const url = apps[appId];
+            if (url) {
+                window.open(url, '_blank', 'noopener,noreferrer');
+            }
+        }
+
         function loadApp(appId) {
             // Check if it's grab-corporate and show lockscreen
             if (appId === 'grab-corporate') {
@@ -759,9 +785,6 @@
         }
 
         function addDigit(digit) {
-            const keySound = document.getElementById('keySound');
-            keySound.currentTime = 0; // reset biar bisa ditekan cepat
-            keySound.play();
             if (currentPassword.length < 6) {
                 currentPassword += digit;
                 updatePasswordDots();
